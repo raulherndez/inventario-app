@@ -45,7 +45,7 @@ export default function Login({ onLoginSuccess }) {
       zIndex: 9999,
       margin: 0
     }}>
-      {/* Caja centralizadora invisible que mantiene todo ordenado y con un ancho perfecto */}
+      {/* Caja centralizadora invisible */}
       <div style={{
         width: '100%',
         maxWidth: '380px',
@@ -60,25 +60,24 @@ export default function Login({ onLoginSuccess }) {
           height: '64px',
           margin: '0 auto 15px auto',
           borderRadius: '50%',
-          border: '2px solid rgba(255, 255, 255, 0.8)',
+          border: '2px solid rgba(0, 0, 0, 0.2)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           fontSize: '28px',
-          color: '#ffffff'
+          color: '#2d3748'
         }}>
           👤
         </div>
 
-        {/* Título */}
+        {/* Título en color oscuro y negrita fuerte */}
         <h2 style={{
           fontSize: '28px',
-          fontWeight: '300',
+          fontWeight: '700',
           letterSpacing: '2px',
-          color: '#ffffff',
+          color: '#2d3748',
           marginBottom: '35px',
-          marginTop: 0,
-          textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          marginTop: 0
         }}>
           User Login
         </h2>
@@ -89,8 +88,9 @@ export default function Login({ onLoginSuccess }) {
             padding: '10px',
             fontSize: '13px',
             color: '#fff',
-            backgroundColor: 'rgba(239, 68, 68, 0.8)',
-            borderRadius: '6px'
+            backgroundColor: 'rgba(239, 68, 68, 0.9)',
+            borderRadius: '6px',
+            fontWeight: '600'
           }}>
             {errorMsg}
           </div>
@@ -101,7 +101,7 @@ export default function Login({ onLoginSuccess }) {
           {/* Input Email */}
           <div style={{
             position: 'relative',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.7)',
+            borderBottom: '2px solid rgba(0, 0, 0, 0.3)',
             marginBottom: '25px',
             paddingBottom: '8px',
             display: 'flex',
@@ -119,8 +119,9 @@ export default function Login({ onLoginSuccess }) {
                 background: 'transparent',
                 border: 'none',
                 outline: 'none',
-                color: '#ffffff',
+                color: '#2d3748',
                 fontSize: '14px',
+                fontWeight: '600',
                 letterSpacing: '0.5px'
               }}
             />
@@ -129,7 +130,7 @@ export default function Login({ onLoginSuccess }) {
           {/* Input Password */}
           <div style={{
             position: 'relative',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.7)',
+            borderBottom: '2px solid rgba(0, 0, 0, 0.3)',
             marginBottom: '20px',
             paddingBottom: '8px',
             display: 'flex',
@@ -147,20 +148,22 @@ export default function Login({ onLoginSuccess }) {
                 background: 'transparent',
                 border: 'none',
                 outline: 'none',
-                color: '#ffffff',
+                color: '#2d3748',
                 fontSize: '14px',
+                fontWeight: '600',
                 letterSpacing: '0.5px'
               }}
             />
           </div>
 
-          {/* Opciones (Remember me / Forgot password) */}
+          {/* Opciones (Remember me / Forgot password en oscuro y negrita) */}
           <div style={{
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
             fontSize: '12px',
-            color: 'rgba(255, 255, 255, 0.9)',
+            fontWeight: '700',
+            color: '#2d3748',
             marginBottom: '30px'
           }}>
             <label style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
@@ -184,7 +187,7 @@ export default function Login({ onLoginSuccess }) {
               border: 'none',
               borderRadius: '4px',
               cursor: 'pointer',
-              fontWeight: '600',
+              fontWeight: '700',
               textTransform: 'uppercase',
               boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
               opacity: loading ? 0.5 : 1
