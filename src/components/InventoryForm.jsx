@@ -14,7 +14,8 @@ export default function InventoryForm({
     proveedor: '',
     marca: '',
     cantidad: '',
-    precio: ''
+    precio: '',
+    forma_pago: '' // <-- Nuevo campo para el método de pago
   });
 
   useEffect(() => {
@@ -25,7 +26,8 @@ export default function InventoryForm({
         proveedor: editingProduct.proveedor_id || editingProduct.proveedor || editingProduct.supplier || '',
         marca: editingProduct.marca_id || editingProduct.marca || editingProduct.brand || '',
         cantidad: editingProduct.cantidad ?? editingProduct.stock ?? '',
-        precio: editingProduct.precio || editingProduct.price || ''
+        precio: editingProduct.precio || editingProduct.price || '',
+        forma_pago: editingProduct.forma_pago || editingProduct.payment_method || ''
       });
     } else {
       setFormData({
@@ -34,7 +36,8 @@ export default function InventoryForm({
         proveedor: '',
         marca: '',
         cantidad: '',
-        precio: ''
+        precio: '',
+        forma_pago: ''
       });
     }
   }, [editingProduct]);
@@ -53,10 +56,10 @@ export default function InventoryForm({
       id: editingProduct ? editingProduct.id : Date.now(),
       precio: parseFloat(formData.precio),
       cantidad: parseInt(formData.cantidad, 10) || 0,
-      // Aseguramos que viajen como números si existen, o null/vacío si no
       categoria: formData.categoria ? parseInt(formData.categoria, 10) : null,
       proveedor: formData.proveedor ? parseInt(formData.proveedor, 10) : null,
-      marca: formData.marca ? parseInt(formData.marca, 10) : null
+      marca: formData.marca ? parseInt(formData.marca, 10) : null,
+      forma_pago: formData.forma_pago || null
     });
 
     setFormData({
@@ -65,7 +68,8 @@ export default function InventoryForm({
       proveedor: '',
       marca: '',
       cantidad: '',
-      precio: ''
+      precio: '',
+      forma_pago: ''
     });
   };
 
@@ -132,6 +136,16 @@ export default function InventoryForm({
               </option>
             );
           })}
+        </select>
+
+        {/* NUEVO: Select de Formas de Pago (Tradicionales + Cripto) */}
+        <select name="forma_pago" value={formData.forma_pago} onChange={handleChange}>
+          <option value="">-- Seleccionar Forma de Pago --</option>
+          <option value="Efectivo">Efectivo</option>
+          <option value="Tarjeta">Tarjeta</option>
+          <option value="Transferencia">Transferencia</option>
+          <option value="Bitcoin">Bitcoin (BTC)</option>
+          <option value="Ethereum">Ethereum (ETH)</option>
         </select>
 
         <input
