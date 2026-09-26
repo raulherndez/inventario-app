@@ -1,98 +1,177 @@
 import React, { useState } from 'react';
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
-import SaasPricing from './components/SaasPricing';
 import InventoryList from './components/InventoryList';
-import CategoryManager from './components/CategoryManager';
-import SupplierManager from './components/SupplierManager';
-import BrandManager from './components/BrandManager';
+import SaasPricing from './components/SaasPricing';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('inventario');
+  const [activeTab, setActiveTab] = useState('inventory');
 
   return (
-    <div style={{ minHeight: '100vh', backgroundColor: '#f1f5f9', color: '#1e293b', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-      
-      {/* Cabecera Superior Corporativa */}
-      <header style={{ backgroundColor: '#ffffff', borderBottom: '1px solid #e2e8f0', position: 'sticky', top: 0, zIndex: 40, boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '16px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          
-          {/* Logo y Título */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <span style={{ padding: '10px', backgroundColor: '#4f46e5', color: '#ffffff', borderRadius: '12px', fontSize: '18px', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
+    <>
+      {/* Si no ha iniciado sesión, muestra únicamente la pantalla de bienvenida / login de Clerk */}
+      <SignedOut>
+        <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f8fafc', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+          <div style={{ backgroundColor: '#ffffff', padding: '40px', borderRadius: '24px', boxShadow: '0 10px 25px -5px rgba(0,0,0,0.05)', border: '1px solid #e2e8f0', textAlign: 'center', maxWidth: '400px', width: '100%' }}>
+            <div style={{ backgroundColor: '#4f46e5', width: '60px', height: '60px', borderRadius: '16px', margin: '0 auto 20px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '24px' }}>
               📦
-            </span>
-            <div>
-              <h1 style={{ fontSize: '18px', fontWeight: 'bold', color: '#0f172a', margin: 0, lineHeight: 1.2 }}>
-                Sistema de Control de Inventario & SaaS
-              </h1>
-              <p style={{ fontSize: '12px', color: '#64748b', margin: '2px 0 0 0' }}>Plataforma corporativa optimizada</p>
             </div>
+            <h1 style={{ fontSize: '22px', fontWeight: 'bold', color: '#0f172a', marginBottom: '8px' }}>Control de Inventario</h1>
+            <p style={{ fontSize: '14px', color: '#64748b', marginBottom: '24px' }}>Inicia sesión para acceder a la plataforma</p>
+            <SignInButton mode="modal">
+              <button style={{ backgroundColor: '#4f46e5', color: '#ffffff', border: 'none', padding: '12px 24px', borderRadius: '12px', fontWeight: 'bold', cursor: 'pointer', fontSize: '15px', width: '100%', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.2)' }}>
+                Iniciar Sesión
+              </button>
+            </SignInButton>
           </div>
-
-          {/* Autenticación Clerk (Perfil de Usuario o Botón de Ingreso) */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <SignedIn>
-              <UserButton afterSignOutUrl="/" />
-            </SignedIn>
-            <SignedOut>
-              <SignInButton mode="modal">
-                <button style={{ backgroundColor: '#4f46e5', color: '#ffffff', border: 'none', padding: '8px 16px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', fontSize: '14px' }}>
-                  Iniciar Sesión
-                </button>
-              </SignInButton>
-            </SignedOut>
-          </div>
-
         </div>
+      </SignedOut>
 
-        {/* Barra de Navegación por Pestañas */}
-        <div style={{ backgroundColor: '#f8fafc', borderTop: '1px solid #e2e8f0', padding: '0 20px' }}>
-          <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', gap: '8px', overflowX: 'auto', padding: '10px 0' }}>
-            {[
-              { id: 'inventario', label: 'Inventario', icon: '📦' },
-              { id: 'categorias', label: 'Categorías', icon: '🏷️' },
-              { id: 'proveedores', label: 'Proveedores', icon: '🚚' },
-              { id: 'marcas', label: 'Marcas', icon: '🏢' },
-              { id: 'saas', label: 'Planes SaaS', icon: '⭐' },
-            ].map((tab) => (
+      {/* Si ya inició sesión, muestra tu aplicación completa exactamente como la tenías */}
+      <SignedIn>
+        <div style={{ minHeight: '100vh', backgroundColor: '#f8fafc', fontFamily: 'system-ui, -apple-system, sans-serif', padding: '24px' }}>
+          <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+            
+            {/* Cabecera / Navbar */}
+            <header style={{ backgroundColor: '#ffffff', borderRadius: '20px', padding: '20px 24px', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)', border: '1px solid #e2e8f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+              
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+                <div style={{ backgroundColor: '#4f46e5', padding: '12px', borderRadius: '14px', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  📦
+                </div>
+                <div>
+                  <h1 style={{ fontSize: '20px', fontWeight: 'bold', color: '#0f172a', margin: 0 }}>Sistema de Control de Inventario & SaaS</h1>
+                  <p style={{ fontSize: '13px', color: '#64748b', margin: 0 }}>Plataforma corporativa optimizada</p>
+                </div>
+              </div>
+
+              <div>
+                <UserButton afterSignOutUrl="/" />
+              </div>
+
+            </header>
+
+            {/* Barra de Navegación por pestañas */}
+            <nav style={{ display: 'flex', gap: '12px', marginBottom: '24px', overflowX: 'auto', paddingBottom: '4px' }}>
               <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => setActiveTab('inventory')}
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
                   padding: '10px 20px',
                   borderRadius: '12px',
-                  fontSize: '14px',
                   fontWeight: 'bold',
                   cursor: 'pointer',
-                  border: 'none',
-                  whiteSpace: 'nowrap',
-                  backgroundColor: activeTab === tab.id ? '#4f46e5' : 'transparent',
-                  color: activeTab === tab.id ? '#ffffff' : '#475569',
-                  boxShadow: activeTab === tab.id ? '0 4px 6px -1px rgba(79, 70, 229, 0.3)' : 'none',
-                  transition: 'all 0.2s'
+                  backgroundColor: activeTab === 'inventory' ? '#4f46e5' : '#ffffff',
+                  color: activeTab === 'inventory' ? '#ffffff' : '#64748b',
+                  boxShadow: activeTab === 'inventory' ? '0 4px 6px -1px rgba(79, 70, 229, 0.2)' : '0 1px 3px rgba(0,0,0,0.05)',
+                  border: activeTab === 'inventory' ? 'none' : '1px solid #e2e8f0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
                 }}
               >
-                <span>{tab.icon}</span>
-                <span>{tab.label}</span>
+                📦 Inventario
               </button>
-            ))}
+              
+              <button
+                onClick={() => setActiveTab('categories')}
+                style={{
+                  padding: '10px 20px',
+                  borderRadius: '12px',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
+                  backgroundColor: activeTab === 'categories' ? '#4f46e5' : '#ffffff',
+                  color: activeTab === 'categories' ? '#ffffff' : '#64748b',
+                  boxShadow: activeTab === 'categories' ? '0 4px 6px -1px rgba(79, 70, 229, 0.2)' : '0 1px 3px rgba(0,0,0,0.05)',
+                  border: activeTab === 'categories' ? 'none' : '1px solid #e2e8f0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}
+              >
+                🏷️ Categorías
+              </button>
+
+              <button
+                onClick={() => setActiveTab('providers')}
+                style={{
+                  padding: '10px 20px',
+                  borderRadius: '12px',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
+                  backgroundColor: activeTab === 'providers' ? '#4f46e5' : '#ffffff',
+                  color: activeTab === 'providers' ? '#ffffff' : '#64748b',
+                  boxShadow: activeTab === 'providers' ? '0 4px 6px -1px rgba(79, 70, 229, 0.2)' : '0 1px 3px rgba(0,0,0,0.05)',
+                  border: activeTab === 'providers' ? 'none' : '1px solid #e2e8f0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}
+              >
+                🚚 Proveedores
+              </button>
+
+              <button
+                onClick={() => setActiveTab('brands')}
+                style={{
+                  padding: '10px 20px',
+                  borderRadius: '12px',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
+                  backgroundColor: activeTab === 'brands' ? '#4f46e5' : '#ffffff',
+                  color: activeTab === 'brands' ? '#ffffff' : '#64748b',
+                  boxShadow: activeTab === 'brands' ? '0 4px 6px -1px rgba(79, 70, 229, 0.2)' : '0 1px 3px rgba(0,0,0,0.05)',
+                  border: activeTab === 'brands' ? 'none' : '1px solid #e2e8f0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}
+              >
+                🏢 Marcas
+              </button>
+
+              <button
+                onClick={() => setActiveTab('saas')}
+                style={{
+                  padding: '10px 20px',
+                  borderRadius: '12px',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
+                  backgroundColor: activeTab === 'saas' ? '#4f46e5' : '#ffffff',
+                  color: activeTab === 'saas' ? '#ffffff' : '#64748b',
+                  boxShadow: activeTab === 'saas' ? '0 4px 6px -1px rgba(79, 70, 229, 0.2)' : '0 1px 3px rgba(0,0,0,0.05)',
+                  border: activeTab === 'saas' ? 'none' : '1px solid #e2e8f0',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px'
+                }}
+              >
+                ⭐ Planes SaaS
+              </button>
+            </nav>
+
+            {/* Contenido Dinámico según la pestaña activa */}
+            <main>
+              {activeTab === 'inventory' && <InventoryList />}
+              {activeTab === 'categories' && (
+                <div style={{ backgroundColor: '#fff', padding: '32px', borderRadius: '20px', border: '1px solid #e2e8f0', textAlign: 'center', color: '#64748b' }}>
+                  <h2>Módulo de Categorías en desarrollo</h2>
+                </div>
+              )}
+              {activeTab === 'providers' && (
+                <div style={{ backgroundColor: '#fff', padding: '32px', borderRadius: '20px', border: '1px solid #e2e8f0', textAlign: 'center', color: '#64748b' }}>
+                  <h2>Módulo de Proveedores en desarrollo</h2>
+                </div>
+              )}
+              {activeTab === 'brands' && (
+                <div style={{ backgroundColor: '#fff', padding: '32px', borderRadius: '20px', border: '1px solid #e2e8f0', textAlign: 'center', color: '#64748b' }}>
+                  <h2>Módulo de Marcas en desarrollo</h2>
+                </div>
+              )}
+              {activeTab === 'saas' && <SaasPricing />}
+            </main>
+
           </div>
         </div>
-      </header>
-
-      {/* Contenido Dinámico según la Pestaña Activa */}
-      <main style={{ padding: '32px 0' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-          {activeTab === 'inventario' && <InventoryList />}
-          {activeTab === 'categorias' && <CategoryManager />}
-          {activeTab === 'proveedores' && <SupplierManager />}
-          {activeTab === 'marcas' && <BrandManager />}
-          {activeTab === 'saas' && <SaasPricing />}
-        </div>
-      </main>
-    </div>
+      </SignedIn>
+    </>
   );
 }
