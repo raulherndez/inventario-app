@@ -1,9 +1,8 @@
-//actualizacion de app.jsx
 import React, { useState } from 'react';
 import { SignedIn, SignedOut, SignIn, UserButton } from '@clerk/clerk-react';
 import InventoryList from './components/InventoryList';
 import CategoryManager from './components/CategoryManager';
-import ProviderManager from './components/ProvideDerManager';
+import ProviderManager from './components/ProviderManager';
 import BrandManager from './components/BrandManager';
 import SaasPricing from './components/SaasPricing';
 
