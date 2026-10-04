@@ -15,7 +15,7 @@ export default function InventoryForm({
     marca: '',
     cantidad: '',
     precio: '',
-    forma_pago: '' // <-- Nuevo campo para el método de pago
+    forma_pago: ''
   });
 
   useEffect(() => {
@@ -80,9 +80,12 @@ export default function InventoryForm({
   };
 
   return (
-    <form className="inventory-form" onSubmit={handleSubmit}>
-      <h2>{editingProduct ? 'Editar Producto' : 'Agregar Producto'}</h2>
-      <div className="form-group">
+    <form className="w-full bg-white p-6 rounded-2xl shadow-md flex flex-col gap-4" onSubmit={handleSubmit}>
+      <h2 className="text-xl font-bold text-gray-800 mb-2">
+        {editingProduct ? 'Editar Producto' : 'Agregar Producto'}
+      </h2>
+      
+      <div className="flex flex-col gap-3">
         <input
           type="text"
           name="nombre"
@@ -90,10 +93,16 @@ export default function InventoryForm({
           value={formData.nombre}
           onChange={handleChange}
           required
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 text-gray-800"
         />
         
         {/* Select de Categorías */}
-        <select name="categoria" value={formData.categoria} onChange={handleChange}>
+        <select 
+          name="categoria" 
+          value={formData.categoria} 
+          onChange={handleChange}
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 text-gray-800"
+        >
           <option value="">-- Seleccionar Categoría --</option>
           {categories.length > 0 ? (
             categories.map((cat, index) => {
@@ -111,7 +120,12 @@ export default function InventoryForm({
         </select>
 
         {/* Select de Proveedores */}
-        <select name="proveedor" value={formData.proveedor} onChange={handleChange}>
+        <select 
+          name="proveedor" 
+          value={formData.proveedor} 
+          onChange={handleChange}
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 text-gray-800"
+        >
           <option value="">-- Seleccionar Proveedor --</option>
           {suppliers.map((sup, index) => {
             const nameValue = extractName(sup);
@@ -125,7 +139,12 @@ export default function InventoryForm({
         </select>
 
         {/* Select de Marcas */}
-        <select name="marca" value={formData.marca} onChange={handleChange}>
+        <select 
+          name="marca" 
+          value={formData.marca} 
+          onChange={handleChange}
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 text-gray-800"
+        >
           <option value="">-- Seleccionar Marca --</option>
           {brands.map((b, index) => {
             const nameValue = extractName(b);
@@ -138,8 +157,13 @@ export default function InventoryForm({
           })}
         </select>
 
-        {/* NUEVO: Select de Formas de Pago (Tradicionales + Cripto) */}
-        <select name="forma_pago" value={formData.forma_pago} onChange={handleChange}>
+        {/* Select de Formas de Pago */}
+        <select 
+          name="forma_pago" 
+          value={formData.forma_pago} 
+          onChange={handleChange}
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 text-gray-800"
+        >
           <option value="">-- Seleccionar Forma de Pago --</option>
           <option value="Efectivo">Efectivo</option>
           <option value="Tarjeta">Tarjeta</option>
@@ -155,6 +179,7 @@ export default function InventoryForm({
           value={formData.cantidad}
           onChange={handleChange}
           required
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 text-gray-800"
         />
         <input
           type="number"
@@ -164,14 +189,16 @@ export default function InventoryForm({
           value={formData.precio}
           onChange={handleChange}
           required
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 text-gray-800"
         />
       </div>
-      <div className="form-actions">
-        <button type="submit" className="btn btn-primary">
+
+      <div className="flex flex-col sm:flex-row gap-3 mt-4">
+        <button type="submit" className="w-full py-2.5 px-4 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors shadow">
           {editingProduct ? 'Actualizar' : 'Guardar'}
         </button>
         {editingProduct && (
-          <button type="button" className="btn btn-secondary" onClick={onCancelEdit}>
+          <button type="button" className="w-full py-2.5 px-4 bg-gray-300 hover:bg-gray-400 text-gray-800 font-medium rounded-lg transition-colors" onClick={onCancelEdit}>
             Cancelar
           </button>
         )}
